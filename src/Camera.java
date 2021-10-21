@@ -14,7 +14,7 @@ public class Camera {
 
     @Override
     public String toString() {
-
+        return this.x + "," + this.y;
     }
 
     private int x;
