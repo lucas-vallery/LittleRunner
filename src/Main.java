@@ -18,6 +18,7 @@ public class Main extends Application{
         Group root = new Group();
         Scene scene = new GameScene(root, 600, 400);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     public static void main(String[] args) {
