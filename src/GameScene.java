@@ -1,3 +1,4 @@
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,7 +11,8 @@ public class GameScene extends Scene {
         super(group, v, v1);
         this.v = v;
         this.v1 = v1;
-        camera = new Camera(300,0);
+        timer.start();
+        camera = new Camera(100,0, perso);
         group.getChildren().add(left.getImage());
         group.getChildren().add(right.getImage());
         group.getChildren().add(perso.getImage());
@@ -18,25 +20,31 @@ public class GameScene extends Scene {
 
     }
 
-    private Camera camera;
-    private StaticThings left = new StaticThings("file:img\\desert.png",800,600);
-    private StaticThings right = new StaticThings("file:img\\desert.png",800,600);
-    private Hero perso = new Hero("file:img\\PNG Sequences\\Idle Blink\\Minotaur_02_Idle Blinking_000.png", 300, 0);
-    private double v;
-    private double v1;
-
     public void render(){
-        double xCam = camera.getX()+200;
+        double xCam = camera.getX();
         double offsetLeft = xCam%left.getX();
 
         left.getImage().setViewport(new Rectangle2D(offsetLeft,0,left.getX()-offsetLeft,left.getY()));
-        right.getImage().setViewport(new Rectangle2D(0, 0, v-(left.getX()-offsetLeft), right.getY()));
         right.getImage().setX(left.getX()-offsetLeft);
 
         perso.getImage().setViewport((new Rectangle2D(0, 0, perso.getxWindow(), perso.getyWindow())));
-        perso.getImage().setY(v1-perso.getHeroHeight());
-
-
+        perso.getImage().setY(v1-perso.getHeroHeight()-40);
     }
+
+    private Camera camera;
+    private StaticThings left = new StaticThings("file:img\\foret.png",800,600);
+    private StaticThings right = new StaticThings("file:img\\foret.png",800,600);
+    private Hero perso = new Hero("file:img\\PNG Sequences\\Idle Blink\\Minotaur_02_Idle Blinking_000.png", 300, 0);
+    private AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long time) {
+            perso.update(time);
+            camera.update(time);
+            perso.render(time);
+            render();
+        }
+    };
+    private double v;
+    private double v1;
 
 }

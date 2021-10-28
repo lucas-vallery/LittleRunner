@@ -1,15 +1,19 @@
+import javafx.animation.AnimationTimer;
+
 public class Camera {
-    public Camera (int x, int y) {
+    public Camera (double x, double y, AnimatedThings c) {
         this.x = x;
         this.y = y;
+        this.center = c;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
-        return y;
+
+    public void update (long time) {
+        this.x= center.getX();
     }
 
     @Override
@@ -17,6 +21,7 @@ public class Camera {
         return this.x + "," + this.y;
     }
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
+    private AnimatedThings center;
 }

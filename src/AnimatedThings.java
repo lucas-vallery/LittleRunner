@@ -15,6 +15,22 @@ public abstract class AnimatedThings {
         return image;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public double getxWindow() {return xWindow; }
 
     public double getyWindow() {return yWindow; }
@@ -27,8 +43,8 @@ public abstract class AnimatedThings {
         this.yWindow = yWindow;
     }
 
-    private double x;
-    private double y;
+    protected double x;
+    protected double y;
     private String fileName;
     private ImageView image;
     private int attitude;
