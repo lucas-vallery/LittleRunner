@@ -9,6 +9,7 @@ public class Hero extends AnimatedThings{
         this.setyWindow(490);
         this.getImage().setPreserveRatio(true);
         this.getImage().setFitHeight(heroHeight);
+
     }
 
     public int getHeroHeight () {return heroHeight;}
@@ -18,8 +19,18 @@ public class Hero extends AnimatedThings{
         this.getImage().setImage(new Image("file:img/PNG Sequences/Walking/Minotaur_02_Walking_" + String.format("%03d" , time%18) + ".png"));
     }
 
+    public void jump () {
+        if(y <= 45)
+            yVel += 5;
+    }
     public void update (long time) {
         x=x+2;
+        y += yVel;
+        yVel -= 0.1;
+        if(y < 40) {
+            y = 40;
+            yVel *= - 0.2;
+        }
     }
 
     private int heroHeight = 150;

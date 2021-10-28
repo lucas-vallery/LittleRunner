@@ -45,6 +45,7 @@ public abstract class AnimatedThings {
 
     protected double x;
     protected double y;
+    protected double yVel;
     private String fileName;
     private ImageView image;
     private int attitude;

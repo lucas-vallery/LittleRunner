@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 public class GameScene extends Scene {
 
@@ -16,8 +17,13 @@ public class GameScene extends Scene {
         group.getChildren().add(left.getImage());
         group.getChildren().add(right.getImage());
         group.getChildren().add(perso.getImage());
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                //System.out.println("Jump");
+                perso.jump();
+            }
+        });
         render();
-
     }
 
     public void render(){
@@ -28,8 +34,9 @@ public class GameScene extends Scene {
         right.getImage().setX(left.getX()-offsetLeft);
 
         perso.getImage().setViewport((new Rectangle2D(0, 0, perso.getxWindow(), perso.getyWindow())));
-        perso.getImage().setY(v1-perso.getHeroHeight()-40);
+        perso.getImage().setY(v1-(perso.getHeroHeight()+perso.getY())-40);
     }
+
 
     private Camera camera;
     private StaticThings left = new StaticThings("file:img\\foret.png",800,600);
@@ -46,5 +53,4 @@ public class GameScene extends Scene {
     };
     private double v;
     private double v1;
-
 }
