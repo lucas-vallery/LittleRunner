@@ -31,9 +31,13 @@ public abstract class AnimatedThings {
         this.y = y;
     }
 
-    public double getxWindow() {return xWindow; }
+    public double getxWindow() {
+        return xWindow;
+    }
 
-    public double getyWindow() {return yWindow; }
+    public double getyWindow() {
+        return yWindow;
+    }
 
     public void setxWindow(double xWindow) {
         this.xWindow = xWindow;

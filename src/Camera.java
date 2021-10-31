@@ -1,5 +1,3 @@
-import javafx.animation.AnimationTimer;
-
 public class Camera {
     public Camera (double x, double y, AnimatedThings c) {
         this.x = x;
@@ -11,8 +9,8 @@ public class Camera {
         return x;
     }
 
-
     public void update (long time) {
+        //Following center (the hero in this case)
         this.x= center.getX();
     }
 

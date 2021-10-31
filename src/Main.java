@@ -1,28 +1,37 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class Main extends Application{
 
+    @Override
     public void start(Stage primaryStage){
-        primaryStage.setTitle("LittleRunner");
+        primaryStage.setTitle("Little Runner");
         Group root = new Group();
-        Scene scene = new GameScene(root, 600, 400);
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        Group root1 = new Group();
+
+        Scene gameScene = new GameScene(root, 600, 400);
+        StartingScene startingScene = new StartingScene(root1, 600, 400);
+
+        // Launching the starting scene
+        displayingTheScene(startingScene, primaryStage);
+
+        //Waiting a mouse event
+        startingScene.setOnMouseReleased(event -> {
+                //Launching the game scene on a click release
+                displayingTheScene(gameScene, primaryStage);
+        });
     }
+
     public static void main(String[] args) {
         launch(args);
         // write your code here
+    }
+
+    private void displayingTheScene(Scene currentScene, Stage primaryStage) {
+        primaryStage.setResizable(false);
+        primaryStage.setScene(currentScene);
+        primaryStage.show();
     }
 }
