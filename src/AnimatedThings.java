@@ -1,6 +1,8 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 public abstract class AnimatedThings {
 
     public AnimatedThings (String fileName, double x, double y){
@@ -53,10 +55,11 @@ public abstract class AnimatedThings {
     private String fileName;
     private ImageView image;
     private int attitude;
-    private int index;
+    protected int index;
     private int timeFrame;
-    private int maximumIndex;
-    private double xWindow;
-    private double yWindow;
-    private int frameOffset;
+    protected int maximumIndex;
+    protected double xWindow;
+    protected double yWindow;
+    protected int frameOffset;
+    protected ArrayList<Image> imageList;
 }

@@ -24,11 +24,11 @@ public class Hero extends AnimatedThings{
     public void jump () {
         //Adding a vertical acceleration to the hero
         if(y <= 0)
-            yVel += 8;
+            yVel += 9;
     }
     public void update (long time) {
         //Walking
-        x=x+3;
+        x+=3;
 
         //Computing the gravity effect
         y += yVel;

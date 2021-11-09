@@ -4,6 +4,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
+
 public class GameScene extends Scene {
 
     public GameScene(Group group, double v, double v1) {
@@ -13,9 +15,16 @@ public class GameScene extends Scene {
         timer.start();
         camera = new Camera(100,0, perso);
 
+        for (int i = 0; i < 10; i++) {
+            foes.add(new Enemy());
+        }
+
         group.getChildren().add(left.getImage());
         group.getChildren().add(right.getImage());
         group.getChildren().add(perso.getImage());
+        for (Enemy foe: foes) {
+            group.getChildren().add(foe.getImage());
+        }
 
         //Triggering a jump when space is pressed
         this.setOnKeyPressed(event -> {
@@ -47,6 +56,8 @@ public class GameScene extends Scene {
 
     private Hero perso = new Hero("file:img\\PNG Sequences\\Idle Blink\\Minotaur_02_Idle Blinking_000.png", 300, 0);
 
+    private ArrayList<Enemy> foes = new ArrayList<>(30);
+
     //Counting the time and refreshing the game scene
     private AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -54,6 +65,10 @@ public class GameScene extends Scene {
             perso.update(time);
             camera.update(time);
             perso.render(time);
+            for (Enemy foe: foes) {
+                foe.update(time);
+                foe.render(time);
+            }
             render();
         }
     };
