@@ -16,7 +16,7 @@ public class Enemy extends AnimatedThings{
             imageList.add(new Image("file:img/Enemy/Walking/Minotaur_01_Walking_" + String.format("%03d" , i) + ".png"));
         }
 
-        //Setting the hero appearance
+        //Setting the enemy appearance
         maximumIndex = 17;
         this.setxWindow(720);
         this.setyWindow(490);
