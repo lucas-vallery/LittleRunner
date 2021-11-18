@@ -1,27 +1,25 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 
 public class Main extends Application{
 
+
     @Override
     public void start(Stage primaryStage){
         primaryStage.setTitle("Little Runner");
         Group root = new Group();
-        Group root1 = new Group();
 
         Scene gameScene = new GameScene(root, 600, 400);
-        StartingScene startingScene = new StartingScene(root1, 600, 400);
 
         // Launching the starting scene
-        displayingTheScene(startingScene, primaryStage);
+        //displayingTheScene(startingScene, primaryStage);
+        displayingTheScene(gameScene, primaryStage);
 
-        //Waiting a mouse event
-        startingScene.setOnMouseReleased(event -> {
-                //Launching the game scene on a click release
-                displayingTheScene(gameScene, primaryStage);
-        });
     }
 
     public static void main(String[] args) {

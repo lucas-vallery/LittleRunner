@@ -1,5 +1,7 @@
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,7 @@ public abstract class AnimatedThings {
         this.frameOffset = 0;
         this.image = new ImageView(new Image(fileName));
     }
+
 
     public ImageView getImage() {
         return image;
@@ -49,17 +52,25 @@ public abstract class AnimatedThings {
         this.yWindow = yWindow;
     }
 
+    public Rectangle getHitBox() { return hitBox; }
+
+    public void setAttitude(int attitude){
+        this.attitude = attitude;
+    }
+
     protected double x;
     protected double y;
     protected double yVel;
+    protected Rectangle hitBox;
     private String fileName;
     private ImageView image;
-    private int attitude;
+    protected int attitude;
     protected int index;
-    private int timeFrame;
     protected int maximumIndex;
     protected double xWindow;
     protected double yWindow;
     protected int frameOffset;
-    protected ArrayList<Image> imageList;
+    protected ArrayList<Image> walkingSequence;
+    protected ArrayList<Image> idlingSequence;
+    protected int timeDivider;
 }
