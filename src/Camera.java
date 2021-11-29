@@ -11,7 +11,8 @@ public class Camera {
 
     public void update (long time) {
         //Following center (the hero in this case)
-        this.x= center.getX();
+        x = (1-alpha)*center.getX() + alpha*x;
+        //x = center.getX();
     }
 
     @Override
@@ -21,5 +22,6 @@ public class Camera {
 
     private double x;
     private double y;
+    private double alpha = 0.90;
     private AnimatedThings center;
 }

@@ -72,5 +72,6 @@ public abstract class AnimatedThings {
     protected int frameOffset;
     protected ArrayList<Image> walkingSequence;
     protected ArrayList<Image> idlingSequence;
+    protected ArrayList<Image> dyingSequence;
     protected int timeDivider;
 }

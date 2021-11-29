@@ -25,7 +25,7 @@ public class Enemy extends AnimatedThings{
         this.getImage().setPreserveRatio(true);
         this.getImage().setFitHeight(enemyHeight);
 
-        this.hitBox = new Rectangle(55, this.y, this.enemyWidth-40, this.enemyWidth-20);
+        this.hitBox = new Rectangle(55, this.y, this.enemyWidth-80, this.enemyWidth-20);
         this.hitBox.setFill(Color.TRANSPARENT);
         this.hitBox.setStroke(Color.RED);
         this.hitBox.setStrokeWidth(3);
@@ -37,7 +37,7 @@ public class Enemy extends AnimatedThings{
         getImage().setViewport((new Rectangle2D(0, 0, xWindow, yWindow)));
         getImage().setY(400-(enemyHeight+y)-40);
         this.hitBox.setY(400-(enemyHeight+y)-30);
-        this.hitBox.setX(x+50);
+        this.hitBox.setX(x+70);
         getImage().setX(x);
     }
 

@@ -18,8 +18,8 @@ public class GameScene extends Scene {
         this.v1 = v1;
         timer.start();
         camera = new Camera(0,0, perso);
-        startingText = new CustomText(80, 110, 45, "<Press any key>\n>to start<", ">Press any key<\n<to start>");
-        resumingText = new CustomText(80, 110, 45, "<Press any key>\n>to resume<", ">Press any key<\n<to resume>");
+        startingText = new CustomText(180, 110, 45, "<Press any key>\n>to start<", ">Press any key<\n<to start>");
+        resumingText = new CustomText(180, 110, 45, "<Press any key>\n>to resume<", ">Press any key<\n<to resume>");
 
 
         for (int i = 0; i < 10; i++) {
@@ -28,20 +28,21 @@ public class GameScene extends Scene {
 
         group.getChildren().add(left.getImage());
         group.getChildren().add(right.getImage());
-        group.getChildren().add(perso.getHitBox());
-        group.getChildren().add(perso.getImage());
-        group.getChildren().add(startingText.getText());
         for (Enemy foe: foes) {
             group.getChildren().add(foe.getImage());
-            group.getChildren().add(foe.getHitBox());
+           // group.getChildren().add(foe.getHitBox());
         }
+        //group.getChildren().add(perso.getHitBox());
+        group.getChildren().add(perso.getImage());
+        group.getChildren().add(startingText.getText());
+
 
         //Triggering a jump when space is pressed
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.SPACE && start) {
                 perso.jump();
             }
-            else if (event.getCode() == KeyCode.ESCAPE && start) {
+            else if (event.getCode() == KeyCode.ESCAPE && start && !perso.isDead()) {
                 start = false;
                 group.getChildren().add(resumingText.getText());
                 perso.setAttitude(0);
@@ -57,15 +58,17 @@ public class GameScene extends Scene {
     }
 
     public void render(){
+        //Displaying the hero
+        perso.getImage().setX(perso.getX() - camera.getX());
+        perso.getHitBox().setX(perso.getX() - camera.getX()+60);
+        perso.getImage().setY(v1-(perso.getHeroHeight()+perso.getY())-40);
+        perso.getHitBox().setY(v1-(perso.getHeroHeight()+perso.getY())-30);
+
         //Displaying the background based on the position of the camera
         double xCam = camera.getX();
         double offsetLeft = xCam%left.getX();
         left.getImage().setViewport(new Rectangle2D(offsetLeft,0,left.getX()-offsetLeft,left.getY()));
         right.getImage().setX(left.getX()-offsetLeft);
-
-        //Displaying the hero
-        perso.getImage().setY(v1-(perso.getHeroHeight()+perso.getY())-40);
-        perso.getHitBox().setY(v1-(perso.getHeroHeight()+perso.getY())-30);
     }
 
     private double v;
@@ -73,8 +76,8 @@ public class GameScene extends Scene {
     private Camera camera;
     private boolean start = false;
 
-    private StaticThings left = new StaticThings("file:img\\foret.png",800,600);
-    private StaticThings right = new StaticThings("file:img\\foret.png",800,600);
+    private StaticThings left = new StaticThings("file:img\\foret.png",800,400);
+    private StaticThings right = new StaticThings("file:img\\foret.png",800,400);
 
     private Hero perso = new Hero("file:img\\PNG Sequences\\Idle Blink\\Minotaur_02_Idle Blinking_000.png", 0, 0);
 
@@ -86,28 +89,31 @@ public class GameScene extends Scene {
     private AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long time) {
-            perso.update(time);
             camera.update(time);
+            perso.update(time);
             perso.render(time);
 
             if(!start) {
                 startingText.render(time);
                 resumingText.render(time);
                 for (Enemy foe : foes) {
-                      foe.render(time);
+                    foe.render(time);
                 }
             }
             else {
                 for (Enemy foe : foes) {
                     foe.update(time);
                     foe.render(time);
-                    /*
-                    if (perso.getHitBox().intersects(foe.getHitBox())) {
-                        if (!perso.isInvincible()) {
-                            perso.addInvincibility();
-                            perso.setY(200);
+                    if (perso.getHitBox().intersects(foe.getHitBox().getX(), foe.getHitBox().getY(), foe.getHitBox().getWidth(), foe.getHitBox().getHeight())) {
+                        if (!perso.isInvincible() && !(perso.hitBox.getY()<foe.hitBox.getY())) {
+                            perso.setAttitude(2);
                         }
-                    }*/
+                        if(perso.hitBox.getY()<foe.hitBox.getY()){
+                            perso.bounce();
+                            foe.hitBox.setHeight(1);
+                            foe.hitBox.setY(foe.hitBox.getY()+250);
+                            foe.getImage().setFitHeight(1);                        }
+                    }
                 }
             }
             render();

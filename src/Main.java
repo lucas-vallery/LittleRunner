@@ -14,10 +14,9 @@ public class Main extends Application{
         primaryStage.setTitle("Little Runner");
         Group root = new Group();
 
-        Scene gameScene = new GameScene(root, 600, 400);
+        Scene gameScene = new GameScene(root, 800, 400);
 
-        // Launching the starting scene
-        //displayingTheScene(startingScene, primaryStage);
+        //Launching the starting scene
         displayingTheScene(gameScene, primaryStage);
 
     }
